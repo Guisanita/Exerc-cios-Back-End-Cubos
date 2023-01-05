@@ -1,0 +1,38 @@
+[
+    {
+        "cep": "14055-340",
+        "logradouro": "Rua Salvador Neves",
+        "complemento": "até 628/629",
+        "bairro": "Vila Maria Luiza",
+        "localidade": "Ribeirão Preto",
+        "uf": "SP",
+        "ibge": "3543402",
+        "gia": "5824",
+        "ddd": "16",
+        "siafi": "6969"
+    },
+    {
+        "cep": "46690-000",
+        "logradouro": "",
+        "complemento": "",
+        "bairro": "",
+        "localidade": "Abaíra",
+        "uf": "BA",
+        "ibge": "2900108",
+        "gia": "",
+        "ddd": "77",
+        "siafi": "3301"
+    },
+    {
+        "cep": "14055-360",
+        "logradouro": "Rua Fortaleza",
+        "complemento": "",
+        "bairro": "Vila Maria Luiza",
+        "localidade": "Ribeirão Preto",
+        "uf": "SP",
+        "ibge": "3543402",
+        "gia": "5824",
+        "ddd": "16",
+        "siafi": "6969"
+    }
+]
