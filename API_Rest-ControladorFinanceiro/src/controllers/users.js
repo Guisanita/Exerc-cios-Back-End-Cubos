@@ -2,7 +2,6 @@ const pool = require('../server/server');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { verifyThereEmail } = require('../func/users');
-const passwordToken = require('../constant/passwordPostgres');
 
 const registerUser = async (req, res) => {
     const { nome: name, email, senha: password } = req.body;
@@ -48,7 +47,7 @@ const makeLogin = async (req, res) => {
             return res.status(400).json({ 'message': 'Email/password invalid!' })
         }
 
-        const token = jwt.sign({ id: validUser.id }, passwordToken, {
+        const token = jwt.sign({ id: validUser.id }, process.env.PASSWORD, {
             expiresIn: '8h'
         });
 

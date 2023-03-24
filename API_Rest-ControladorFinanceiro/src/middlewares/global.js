@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const pool = require('../server/server');
-const passwordToken = require('../constant/passwordPostgres');
+
 
 const authorizeUser = async (req, res, next) => {
     const { authorization } = req.headers;
@@ -13,7 +13,7 @@ const authorizeUser = async (req, res, next) => {
 
     try {
 
-        const { id } = jwt.verify(token, passwordToken);
+        const { id } = jwt.verify(token, process.env.PASSWORD);
 
         const { rows, rowCount } = await pool.query(`SELECT * FROM usuarios 
         WHERE id = $1`, [id])
