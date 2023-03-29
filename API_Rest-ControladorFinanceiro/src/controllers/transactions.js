@@ -71,12 +71,12 @@ const registerTransaction = async (req, res) => {
         ON transacoes.categoria_id = categorias.id WHERE transacoes.id = $1`,
             [registeredTransaction.rows[0].id]);
 
-        const answer = {
+        const result = {
             ...registeredTransaction.rows[0],
             ...categoryName.rows[0]
         }
 
-        return res.status(200).json(answer);
+        return res.status(200).json(result);
 
     } catch (error) {
         return res.status(500).json(error.message);
@@ -98,7 +98,7 @@ const updateTransaction = async (req, res) => {
             SET descricao = $1, valor = $2, data = $3, 
             categoria_id = $4, tipo = $5 WHERE id = $6`, values);
 
-        return res.status(200).json();
+        return res.status(204).json();
 
     } catch (error) {
         return res.status(500).json(error.message);
@@ -113,7 +113,7 @@ const deleteTransaction = async (req, res) => {
 
         await pool.query(`DELETE FROM transacoes where id = $1`, [id]);
 
-        return res.status(200).json();
+        return res.status(204).json();
 
     } catch (error) {
         return res.status(500).json(error.message);
@@ -124,8 +124,8 @@ const getBankStatement = async (req, res) => {
     const { id: idUser } = req.user;
 
     try {
-        let incomin = 0;
-        let output = 0;
+        let income = 0;
+        let outcome = 0;
 
         const userTransactions = await pool.query(`SELECT * FROM transacoes
         WHERE usuario_id = $1`, [idUser]);
@@ -133,15 +133,15 @@ const getBankStatement = async (req, res) => {
         userTransactions.rows.map((transaction) => {
 
             if (transaction.tipo === 'entrada') {
-                incomin += transaction.valor;
+                income += transaction.valor;
             }
 
             if (transaction.tipo === 'saida') {
-                output += transaction.valor;
+                outcome += transaction.valor;
             }
         })
 
-        return res.status(200).json({ 'entrada': incomin, 'saida': output });
+        return res.status(200).json({ 'entrada': income, 'saida': outcome });
 
     } catch (error) {
         return res.status(500).json(error.message);

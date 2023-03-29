@@ -47,7 +47,7 @@ const makeLogin = async (req, res) => {
             return res.status(400).json({ 'message': 'Email/password invalid!' })
         }
 
-        const token = jwt.sign({ id: validUser.id }, process.env.PASSWORD, {
+        const token = jwt.sign({ id: validUser.id }, process.env.JWT_PASS, {
             expiresIn: '8h'
         });
 
@@ -89,7 +89,7 @@ const uptadeUser = async (req, res) => {
         SET nome=$1, email=$2, senha= $3 where id = $4`
             , [name, email, encrypedPassword, idUser]);
 
-        return res.status(200).json();
+        return res.status(204).json();
 
     } catch (error) {
         return res.status(500).json({ 'message': error.message });
